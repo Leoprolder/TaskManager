@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
+﻿using System.Web.Mvc;
 using TaskManager.Models;
 
 namespace TaskManager.Controllers
@@ -16,23 +12,44 @@ namespace TaskManager.Controllers
             return View("TaskView");
         }
 
-        public ActionResult Create()
+        public ActionResult Create(string description)
         {
+            db.Tasks.Add(new Task(description));
+            db.SaveChanges();
+
+            ViewBag.Tasks = db.Tasks;
+
             return View("TaskView");
         }
 
-        public ActionResult Edit()
+        public ActionResult Edit(Task task)
         {
+            var storedTask = db.Tasks.Find(task.Id);
+            storedTask = task;
+            db.SaveChanges();
+
+            ViewBag.Tasks = db.Tasks;
+
             return View("TaskView");
         }
 
-        public ActionResult Copy()
+        public ActionResult Copy(Task task)
         {
+            db.Tasks.Add(new Task(task.Description));
+            db.SaveChanges();
+
+            ViewBag.Tasks = db.Tasks;
+
             return View("TaskView");
         }
 
-        public ActionResult Delete()
+        public ActionResult Delete(Task task)
         {
+            db.Tasks.Remove(task);
+            db.SaveChanges();
+
+            ViewBag.Tasks = db.Tasks;
+
             return View("TaskView");
         }
     }
