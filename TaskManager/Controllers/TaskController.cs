@@ -16,6 +16,24 @@ namespace TaskManager.Controllers
             return View("TaskView");
         }
 
+        public ActionResult Create()
+        {
+            return View("TaskView");
+        }
 
+        public ActionResult Edit()
+        {
+            return View("TaskView");
+        }
+
+        public ActionResult Copy()
+        {
+            return View("TaskView");
+        }
+
+        public ActionResult Delete()
+        {
+            return View("TaskView");
+        }
     }
 }
