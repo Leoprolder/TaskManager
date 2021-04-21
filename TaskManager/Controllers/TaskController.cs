@@ -9,6 +9,8 @@ namespace TaskManager.Controllers
 
         public ActionResult Index()
         {
+            ViewBag.Tasks = db.Tasks;
+
             return View("TaskView");
         }
 

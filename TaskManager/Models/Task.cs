@@ -8,11 +8,16 @@ namespace TaskManager.Models
         {
             Description = description;
             Done = done;
-            Id = new Guid().ToString();
+            Id = Guid.NewGuid().ToString();
         }
 
         public Task(string description)
             : this(description, false)
+        {
+        }
+
+        public Task()
+            : this(string.Empty, false)
         {
         }
 
