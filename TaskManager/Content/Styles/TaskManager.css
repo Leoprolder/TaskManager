@@ -17,6 +17,7 @@
     margin-top: 20px;
     margin-bottom: 20px;
     box-sizing: border-box;
+    position: relative;
 }
 
 .card:hover {
@@ -45,7 +46,9 @@ body {
 
 .task-controls {
     float: right;
-    bottom: 15px;
+    position: absolute;
+    bottom: 7%;
+    right: 3%;
 }
 
 .cbx {
@@ -162,4 +165,11 @@ body {
     border-radius: 50px;
     background: inherit;
     padding: 20px;
+}
+
+.task-date {
+    opacity: 0.5;
+    float: left;
+    position: absolute;
+    bottom: 3%;
 }

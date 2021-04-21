@@ -22,7 +22,7 @@
 
         <div>
             <button class="card btn" id="create-task-btn" onclick="OpenNewTaskForm()">Create task</button>
-            <div class="task-create hidden">
+            <div class="card task task-create hidden">
                 <h2>Please, enter your task to the field below</h2>
                 <textarea class="task-textarea"></textarea>
                 <div class="task-controls">
@@ -47,6 +47,9 @@
                             </span>
                             <span class="task-description">@task.Description</span>
                         </label>
+                        <div class="task-date">
+                            <i>Created: @task.CreationTime</i>
+                        </div>
                         <div class="task-controls">
                             <span><a href="/Task/Copy?taskId=@task.Id" title="Copy">📋</a></span>
                             <span><a href="/Task/Delete?taskId=@task.Id" title="Delete">❌</a></span>

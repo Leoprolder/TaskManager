@@ -9,6 +9,7 @@ namespace TaskManager.Models
             Description = description;
             Done = done;
             Id = Guid.NewGuid().ToString();
+            CreationTime = DateTime.Now;
         }
 
         public Task(string description)
@@ -26,6 +27,8 @@ namespace TaskManager.Models
         public bool Done { get; set; }
 
         public string Description { get; set; }
+
+        public DateTime CreationTime { get; set; }
 
         public void SwitchDoneCondition()
         {

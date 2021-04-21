@@ -1,4 +1,5 @@
-﻿using System.Web.Mvc;
+﻿using System.Collections.Generic;
+using System.Web.Mvc;
 using TaskManager.Models;
 
 namespace TaskManager.Controllers
@@ -9,7 +10,12 @@ namespace TaskManager.Controllers
 
         public ActionResult Index()
         {
-            ViewBag.Tasks = db.Tasks;
+            var tasks = new List<Task>(db.Tasks);
+
+            var dateComparer = new DateComparer();
+            tasks.Sort(dateComparer);
+
+            ViewBag.Tasks = tasks;
 
             return View("TaskView");
         }
