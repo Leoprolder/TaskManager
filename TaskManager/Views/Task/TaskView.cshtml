@@ -11,7 +11,7 @@
     <meta name="viewport" content="width=device-width" />
     <title>Task manager</title>
     <link href="@Url.Content("~/Content/Styles/TaskManager.css")" rel="stylesheet" type="text/css">
-    <link src="@Url.Content("~/Scripts/Task/TaskManager.js")" type="text/javascript">
+    <script src="@Url.Content("~/Scripts/Task/TaskManager.js")" type="text/javascript"></script>
     <script src="@Url.Content("~/Scripts/jquery-3.4.1.min.js")" type="text/javascript" ></script>
 </head>
 <body>
@@ -21,7 +21,15 @@
         <div class="title"><h1>Manage your tasks like never before.</h1></div>
 
         <div>
-            <button class="card btn" onclick="OpenNewTaskForm()">Create task</button>
+            <button class="card btn" id="create-task-btn" onclick="OpenNewTaskForm()">Create task</button>
+            <div class="task-create hidden">
+                <h2>Please, enter your task to the field below</h2>
+                <textarea class="task-textarea"></textarea>
+                <div class="task-controls">
+                    <button class="btn" onclick="CreateTask(event)">✔️</button>
+                    <button class="btn" onclick="CancelCreateTask(event)">❌</button>
+                </div>
+            </div>
         </div>
 
         @if (ViewBag.Tasks != null)
@@ -29,17 +37,28 @@
             foreach (var task in ViewBag.Tasks)
             {
                 <div class="row task card">
-                    <input class="inp-cbx" id="@task.Id" type="checkbox" checked="@task.Done" style="display: none" />
-                        <label class="cbx" for="@task.Id">
+                    <div class="task-view" id="task-@task.Id">
+                        <input class="inp-cbx" id="check-@task.Id" type="checkbox" checked="@task.Done" style="display: none" />
+                        <label class="cbx" for="check-@task.Id">
                             <span>
                                 <svg width="12px" height="9px" viewBox="0 0 12 9">
                                     <polyline points="1 5 4 8 11 1"></polyline>
                                 </svg>
-                            </span><span>@task.Description</span>
+                            </span>
+                            <span class="task-description">@task.Description</span>
                         </label>
-                    <div class="task-controls">
-                        <button class="btn" onclick="DeleteTask()">❌</button>
-                        <button class="btn" onclick="EditTask()">🖊️</button>
+                        <div class="task-controls">
+                            <span><a href="/Task/Copy?taskId=@task.Id" title="Copy">📋</a></span>
+                            <span><a href="/Task/Delete?taskId=@task.Id" title="Delete">❌</a></span>
+                            <span class="btn" onclick="EditTask(event, '@task.Id')"><a href="#">🖊️</a></span>
+                        </div>
+                    </div>
+                    <div class="task-edit hidden" id="edit-@task.Id">
+                        <textarea class="task-textarea"></textarea>
+                        <div class="task-controls">
+                            <button class="btn" onclick="SaveEditTask(event, '@task.Id')">✔️</button>
+                            <button class="btn" onclick="CancelEditTask(event, '@task.Id')">❌</button>
+                        </div>
                     </div>
                 </div>
             }

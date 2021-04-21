@@ -14,6 +14,7 @@ namespace TaskManager.Controllers
             return View("TaskView");
         }
 
+        [HttpPost]
         public ActionResult Create(string description)
         {
             db.Tasks.Add(new Task(description));
@@ -24,10 +25,11 @@ namespace TaskManager.Controllers
             return View("TaskView");
         }
 
-        public ActionResult Edit(Task task)
+        [HttpPost]
+        public ActionResult Edit(string taskId, string description)
         {
-            var storedTask = db.Tasks.Find(task.Id);
-            storedTask = task;
+            var storedTask = db.Tasks.Find(taskId);
+            storedTask.Description = description;
             db.SaveChanges();
 
             ViewBag.Tasks = db.Tasks;
@@ -35,8 +37,22 @@ namespace TaskManager.Controllers
             return View("TaskView");
         }
 
-        public ActionResult Copy(Task task)
+        [HttpPost]
+        public ActionResult Switch(string taskId)
         {
+            var storedTask = db.Tasks.Find(taskId);
+            storedTask.SwitchDoneCondition();
+            db.SaveChanges();
+
+            ViewBag.Tasks = db.Tasks;
+
+            return View("TaskView");
+        }
+
+        [HttpGet]
+        public ActionResult Copy(string taskId)
+        {
+            var task = db.Tasks.Find(taskId);
             db.Tasks.Add(new Task(task.Description));
             db.SaveChanges();
 
@@ -45,10 +61,18 @@ namespace TaskManager.Controllers
             return View("TaskView");
         }
 
-        public ActionResult Delete(Task task)
+        [HttpGet]
+        public ActionResult Delete(string taskId)
         {
-            db.Tasks.Remove(task);
-            db.SaveChanges();
+            try
+            {
+                var task = db.Tasks.Find(taskId);
+                db.Tasks.Remove(task);
+                db.SaveChanges();
+            }
+            catch
+            {
+            }
 
             ViewBag.Tasks = db.Tasks;
 

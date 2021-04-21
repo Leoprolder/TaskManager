@@ -4,10 +4,10 @@
 }
 
 .card {
-    border-radius: 43px;
-    background: #e0e0e0;
-    box-shadow: -6px -6px 9px #c3c3c3, 6px 6px 9px #ffffff;
-    padding: 20px;
+    border-radius: 50px;
+    background: rgb(218, 236, 236);
+    box-shadow: 5px 5px 10px #bebebe, -5px -5px 10px #ffffff;
+    padding: 40px;
 }
 
 .task {
@@ -20,17 +20,18 @@
 }
 
 .card:hover {
-    border-radius: 43px;
-    background: linear-gradient(315deg, #cacaca, #f0f0f0);
-    box-shadow: -6px -6px 9px #5a5a5a, 6px 6px 9px #ffffff;
+    border-radius: 50px;
+    background: rgb(218, 236, 236);
+    box-shadow: 1px 1px 2px #bebebe, -1px -1px 2px #ffffff;
 }
 
 body {
-    background: rgb(242, 242, 242);
-    font-family: "SF Pro Display";
+    background: rgb(218, 236, 236);
+    font-family: "SF Pro Display","SF Pro Icons","Helvetica Neue","Helvetica","Arial",sans-serif;
     line-height: 1.08349;
     font-weight: 600;
     letter-spacing: -.003em;
+    color: rgb(70, 70, 70);
 }
 
 .title {
@@ -44,6 +45,7 @@ body {
 
 .task-controls {
     float: right;
+    bottom: 15px;
 }
 
 .cbx {
@@ -149,4 +151,15 @@ body {
     50% {
         transform: scale(1.2);
     }
+}
+
+.hidden {
+    display: none;
+}
+
+.task-textarea {
+    width: 100%;
+    border-radius: 50px;
+    background: inherit;
+    padding: 20px;
 }
