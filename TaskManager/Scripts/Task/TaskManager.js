@@ -5,9 +5,12 @@
 
 function CreateTask(event) {
     var description = $("div.task-create textarea").val();
-    $.post("/Task/Create", { description: description });
-    $("div.task-create").addClass("hidden");
-    $("#create-task-btn").removeClass("hidden");
+    $.post("/Task/Create", { description: description }).done(function () {
+        $("div.task-create").addClass("hidden");
+        $("#create-task-btn").removeClass("hidden");
+
+        window.location.reload(true);
+    });
 }
 
 function CancelCreateTask(event) {
